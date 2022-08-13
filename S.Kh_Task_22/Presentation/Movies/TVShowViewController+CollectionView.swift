@@ -25,7 +25,7 @@ extension TVShowViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let destinationVC = UIStoryboard(name: MovieDetailsViewController.identifier, bundle: nil).instantiateViewController(withIdentifier: MovieDetailsViewController.identifier) as? MovieDetailsViewController {
+        if let destinationVC = UIStoryboard(name: TVShowDetailsViewController.identifier, bundle: nil).instantiateViewController(withIdentifier: TVShowDetailsViewController.identifier) as? TVShowDetailsViewController {
             destinationVC.tvShow = tvShows[indexPath.row]
             
             navigationController?.pushViewController(destinationVC, animated: true)

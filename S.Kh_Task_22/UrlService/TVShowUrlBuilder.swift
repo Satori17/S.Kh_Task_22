@@ -11,8 +11,8 @@ import Foundation
 class TVShowUrlBuilder: Request, DataUrl {
     
     static let shared = TVShowUrlBuilder()
+    
     static var page: Int = 1
-    //protocol properties
     private(set) var urlString: String
     private(set) var urlRequest: URLRequest?
     

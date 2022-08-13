@@ -9,30 +9,25 @@ import Foundation
 
 class GuestUrlBuilder: Request, DataUrl {
     
-    
     static let shared = GuestUrlBuilder()
-
-    private(set) var urlString: String
-    private(set) var component: URLComponents?
+    static let guestSessionId = "guestSessionId"
     
-    var urlRequest: URLRequest?
+    private var component: URLComponents?
+    private(set) var urlString: String
+    private(set) var urlRequest: URLRequest?
     
     func withBaseUrl() {
         self.urlString = BaseUrl.guestUrl.rawValue
-    }
-    
-    func withBaseComponent() {
-        if let component = URLComponents(string: urlString) {
-            self.component = component
-        }
     }
     
     override init() {
         self.urlString = ""
         super.init()
         withBaseUrl()
-        withBaseComponent()
-        self.urlRequest = url(requestMethod: .GET, urlComponent: &component!)
+        component = URLComponents(string: urlString)
+        if var component = component {
+            self.urlRequest = url(requestMethod: .GET, urlComponent: &component)
+        }
     }
     
 }

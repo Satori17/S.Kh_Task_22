@@ -13,6 +13,7 @@ class TVShowCell: UICollectionViewCell {
     
     @IBOutlet weak var tvShowImageView: UIImageView!
     @IBOutlet weak var tvShowNameLabel: UILabel!
+    @IBOutlet weak var tvShowRatingLabel: UILabel!
     
     //MARK: - Vars
     
@@ -32,6 +33,9 @@ class TVShowCell: UICollectionViewCell {
     func configure(_ show: TVShowModel) {
         Fetcher.shared.fetchImage(with: show.posterPath, imageView: tvShowImageView)
         tvShowNameLabel.text = show.name
+        if let rating = show.voteAverage {
+            tvShowRatingLabel.text = "\(rating)⭐️"
+        }
     }
     
 }

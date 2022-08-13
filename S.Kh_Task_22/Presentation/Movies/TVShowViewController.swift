@@ -17,8 +17,7 @@ class TVShowViewController: UIViewController {
     
     //MARK: - Vars
     var tvShows = [TVShowModel]()
-    var guest: GuestModel!
-    
+    //for login as guest
     let customView = UIView()
     let customButton = UIButton()
     
@@ -26,6 +25,7 @@ class TVShowViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tvShowsCollectionView.backgroundColor = .clear.withAlphaComponent(0)
         visitAsGuest()
         fetchTVShows()
         setupCollectionView()
@@ -41,10 +41,10 @@ class TVShowViewController: UIViewController {
         }
     }
     
-    private func fetchGuest() {
+    private func generateGuestUser() {
         //Fetching Guest
-        Fetcher.shared.fetchData(with: GuestUrlBuilder.shared, as: GuestModel.self) { guestSession in
-            self.guest = guestSession
+        Fetcher.shared.fetchData(with: GuestUrlBuilder.shared, as: GuestModel.self) { guest in
+            UserDefaults.standard.setValue(guest.guestSessionID, forKey: GuestUrlBuilder.guestSessionId)
         } fail: { message in
             print(message)
         }
@@ -56,7 +56,7 @@ class TVShowViewController: UIViewController {
         tvShowsCollectionView.registerNib(class: TVShowCell.self)
         //flow layout
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.minimumLineSpacing = 5
+        flowLayout.minimumLineSpacing = 10
         flowLayout.scrollDirection = .vertical
         tvShowsCollectionView.collectionViewLayout = flowLayout
     }
@@ -77,11 +77,10 @@ class TVShowViewController: UIViewController {
     }
     
     @objc func visitAsGuestTapped(_ sender: UIButton) {
-        sleep(1)
-        fetchGuest()
+        sleep(1)  //creating guest account simulation
+        generateGuestUser()
         customView.isHidden = true
         customButton.isHidden = true
-        
     }
     
 }

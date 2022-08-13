@@ -18,21 +18,3 @@ extension UICollectionView {
         self.register(T.nibFile, forCellWithReuseIdentifier: T.identifier)
     }
 }
-
-
-
-extension UIImageView {
-    func loadFrom(URLAddress: String) {
-        guard let url = URL(string: URLAddress) else { return }
-        
-        DispatchQueue.global().async {
-            if let imageData = try? Data(contentsOf: url) {
-                DispatchQueue.main.async { [weak self] in
-                    if let imageLoaded = UIImage(data: imageData) {
-                        self?.image = imageLoaded
-                    }
-                }
-            }
-        }
-    }
-}
