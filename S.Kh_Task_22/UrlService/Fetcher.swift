@@ -5,7 +5,6 @@
 //  Created by Saba Khitaridze on 13.08.22.
 //
 
-import Foundation
 import UIKit
 
 enum FetchingError: String, Error {
